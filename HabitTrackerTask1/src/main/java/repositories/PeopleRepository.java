@@ -10,6 +10,7 @@ import java.util.Optional;
 public class PeopleRepository {
     private static final String FILE_NAME = "people.db";
     private List<Person> people;
+    private Person currentPerson;
 
     private static PeopleRepository instance;
 
@@ -60,20 +61,6 @@ public class PeopleRepository {
         people.remove(person);
     }
 
-    public void removeByName(String name) {
-        int index = 0;
-        for(Person person: people) {
-            if(person.getUsername().equals(name))
-                break;
-
-            index++;
-        }
-
-        people.remove(index);
-        System.out.println("Пользователь был успешно удален!");
-
-    }
-
     public void blockByName(String name) {
 
         for(Person person: people) {
@@ -82,9 +69,7 @@ public class PeopleRepository {
                 break;
             }
         }
-
         System.out.println("Пользователь был успешно заблокирован!");
-
     }
 
     public Optional<Person> findPersonByName(String name) {
@@ -108,5 +93,14 @@ public class PeopleRepository {
     public boolean hasAdmin() {
         return people.stream().anyMatch(person -> "ADMIN".equals(person.getRole()));
     }
+
+    public Person getCurrentPerson() {
+        return currentPerson;
+    }
+
+    public void setCurrentPerson(Person currentPerson) {
+        this.currentPerson = currentPerson;
+    }
+
 
 }

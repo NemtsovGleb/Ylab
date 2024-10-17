@@ -1,5 +1,13 @@
+import controllers.AdminController;
+import controllers.AuthController;
+import controllers.HabitController;
+import controllers.PersonController;
 import repositories.PeopleRepository;
+import services.AdminService;
+import services.AuthenticationService;
 import services.PersonService;
+import services.RegistrationService;
+import util.PersonValidator;
 
 import java.util.Scanner;
 
@@ -11,34 +19,20 @@ public class Main {
 
         // инициализация слоев программы
         PeopleRepository peopleRepository = PeopleRepository.getInstance();
-        PersonService PersonService = new PersonService(peopleRepository);
 
-        boolean running = true;
-        while (running) {
-            System.out.println("\n--- МЕНЮ ---");
-            System.out.println("1. Войти");
-            System.out.println("2. Создать аккаунт");
-            System.out.println("3. Выйти из программы");
-            System.out.print("Выберите действие (1, 2 или 3): ");
+        PersonValidator validator = new PersonValidator(peopleRepository);
 
-            String choice = scanner.nextLine().trim();
+        PersonService personService = new PersonService(peopleRepository);
+        RegistrationService registrationService = new RegistrationService(peopleRepository, validator);
+        AuthenticationService authService = new AuthenticationService(peopleRepository);
+        AdminService adminService = new AdminService(peopleRepository, personService);
 
-            switch (choice) {
-                case "1":
-                     if(PersonService.login())
-                         PersonService.showUserMenu();
-                    break;
-                case "2":
-                     PersonService.addPerson();
-                    break;
-                case "3":
-                    peopleRepository.saveData();
-                    System.out.println("До свидания!");
-                    running = false;  // Завершаем цикл, чтобы выйти из программы
-                    break;
-                default:
-                    System.out.println("Неверный выбор. Пожалуйста, выберите действие(1, 2 или 3.");
-            }
-        }
+        HabitController habitController = new HabitController();
+        AdminController adminController = new AdminController(peopleRepository, adminService, personService);
+        PersonController personController = new PersonController(personService, adminController, habitController);
+        AuthController authController = new AuthController(registrationService, authService, personController);
+
+        authController.start();
+
     }
 }
