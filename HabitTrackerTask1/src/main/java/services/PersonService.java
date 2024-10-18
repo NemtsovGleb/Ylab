@@ -95,7 +95,7 @@ public class PersonService {
             String password = scanner.nextLine().trim();
 
             if (password.equals("exit"))
-                break;
+                return status;
 
             if (password.equals(peopleRepository.getCurrentPerson().getPassword())) {
                 break;

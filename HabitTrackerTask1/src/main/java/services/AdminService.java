@@ -17,10 +17,11 @@ public class AdminService {
         this.personService = personService;
     }
 
-    private void showUsers() {
+    private boolean showUsers() {
         // Выведем список пользователей
         if(personService.getAllPeople().size() == 1) {
             System.out.println("Список пользователей пуст");
+            return false;
         } else {
             int index = 1;
             System.out.println("\n Список пользователй:");
@@ -37,6 +38,7 @@ public class AdminService {
                 System.out.println(index + ". " + person.getUsername() + " " + person.getRole() + block);
                 index++;
             }
+            return true;
         }
     }
 
@@ -44,7 +46,8 @@ public class AdminService {
         boolean status = true;
         while(status) {
 
-            showUsers();
+            if(!showUsers())
+                break;
             System.out.println("Напишите номер человека, которого хотите удалить(1-" + (peopleRepository.getAllPeople().size()+1) + ") или exit если передумали:");
             String number = scanner.nextLine().trim();
             if(number.equals("exit"))
@@ -61,7 +64,8 @@ public class AdminService {
         boolean status = true;
         while(status) {
 
-            showUsers();
+            if(!showUsers())
+                break;
             System.out.println("Напишите номер человека, которого хотите заблокировать(1-" + (peopleRepository.getAllPeople().size()+1) + ") или exit если передумали:");
             String name = scanner.nextLine().trim();
             if(name.equals("exit"))

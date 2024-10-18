@@ -12,6 +12,7 @@ public class HabitRepository {
 
     private static final String FILE_NAME = "habits.db";
     private List<Habit> habits;
+    private List<Habit> ownersHabits;
     private static HabitRepository instance;
 
     private HabitRepository() {
@@ -60,4 +61,11 @@ public class HabitRepository {
         habits.remove(habit);
     }
 
+    public List<Habit> getOwnersHabits() {
+        return ownersHabits;
+    }
+
+    public void setOwnersHabits(List<Habit> ownersHabits) {
+        this.ownersHabits = ownersHabits;
+    }
 }
