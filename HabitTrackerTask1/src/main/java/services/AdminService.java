@@ -19,16 +19,16 @@ public class AdminService {
 
     private boolean showUsers() {
         // Выведем список пользователей
-        if(personService.getAllPeople().size() == 1) {
+        if(peopleRepository.getAllPeople().size() == 1) {
             System.out.println("Список пользователей пуст");
-            return false;
+            return true;
         } else {
             int index = 1;
             System.out.println("\n Список пользователй:");
             for (Person person : peopleRepository.getAllPeople()) {
 
                 // Не будем отображать самого админа в качестве пользователя которого можно удалить
-                if(personService.getCurrentPerson() == person)
+                if(peopleRepository.getCurrentPerson() == person)
                     continue;
 
                 String block = "";
@@ -38,7 +38,7 @@ public class AdminService {
                 System.out.println(index + ". " + person.getUsername() + " " + person.getRole() + block);
                 index++;
             }
-            return true;
+            return false;
         }
     }
 
@@ -46,7 +46,7 @@ public class AdminService {
         boolean status = true;
         while(status) {
 
-            if(!showUsers())
+            if(showUsers())
                 break;
             System.out.println("Напишите номер человека, которого хотите удалить(1-" + (peopleRepository.getAllPeople().size()+1) + ") или exit если передумали:");
             String number = scanner.nextLine().trim();
@@ -64,7 +64,7 @@ public class AdminService {
         boolean status = true;
         while(status) {
 
-            if(!showUsers())
+            if(showUsers())
                 break;
             System.out.println("Напишите номер человека, которого хотите заблокировать(1-" + (peopleRepository.getAllPeople().size()+1) + ") или exit если передумали:");
             String name = scanner.nextLine().trim();
