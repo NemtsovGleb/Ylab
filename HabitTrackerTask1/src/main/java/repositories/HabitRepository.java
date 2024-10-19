@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public class HabitRepository {
 
-    private static final String FILE_NAME = "habits.db";
+    private static final String FILE_NAME = "HabitTrackerTask1/src/main/resources/habits.db";
     private List<Habit> habits;
     private List<Habit> ownersHabits;
     private static HabitRepository instance;

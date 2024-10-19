@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class PeopleRepository {
-    private static final String FILE_NAME = "people.db";
+    private static final String FILE_NAME = "HabitTrackerTask1/src/main/resources/people.db";
     private List<Person> people;
     private Person currentPerson;
 
