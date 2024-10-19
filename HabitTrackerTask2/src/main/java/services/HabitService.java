@@ -94,7 +94,6 @@ public class HabitService {
 
         System.out.println("Привычка успешно добавлена!");
         habitRepository.saveData();  // Сохраняем изменения в базе данны
-        peopleRepository.saveData();  // Сохраняем изменения в базе данных
     }
 
     public void removeHabit() {
@@ -126,7 +125,6 @@ public class HabitService {
         peopleRepository.getCurrentPerson().removeHabit(habitToRemove);
         habitRepository.remove(habitToRemove);
         System.out.println("Привычка успешно удалена!");
-        peopleRepository.saveData();  // Сохраняем изменения в базе данных
         habitRepository.saveData();
     }
 
@@ -221,8 +219,6 @@ public class HabitService {
         habitToComplete.addCompletionDate(new Date());
         System.out.println("Привычка \"" + habitToComplete.getName() + "\" отмечена как выполненная!");
         habitRepository.saveData();    // Сохраняем изменения
-        peopleRepository.saveData();  // Сохраняем изменения
-
     }
 
     // Генерация статистики выполнения за указанный период (например неделя)

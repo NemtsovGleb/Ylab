@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class Person implements Serializable {
 
     private static final long serialVersionUID = 2L;
-    private static final Scanner scanner = new Scanner(System.in);
 
     private String username;
     private String password;
@@ -16,8 +15,6 @@ public class Person implements Serializable {
     private String role;
     private boolean isBlocked;
     private List<Habit> habits;
-
-
 
     public Person(String username, String password, String email, String role) {
         this.username = username;
@@ -81,7 +78,4 @@ public class Person implements Serializable {
     public void setIsBlocked(boolean blocked) {
         isBlocked = blocked;
     }
-
-
-
 }
