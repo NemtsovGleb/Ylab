@@ -6,6 +6,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
+
     <!-- // Создание таблицы person -->
     <changeSet id="1" author="Nemtsov_Gleb">
         <createTable tableName="person">
@@ -41,7 +42,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="description" type="TEXT"/>
-            <column name="created_at" type="TIMESTAMP">
+            <column name="created_at" type="DATE">
                 <constraints nullable="false"/>
             </column>
             <column name="frequency" type="VARCHAR(100)"/>
@@ -57,7 +58,8 @@
                                  baseColumnNames="owner_id"
                                  referencedTableName="person"
                                  referencedColumnNames="id"
-                                 constraintName="fk_habit_owner"/>
+                                 constraintName="fk_habit_owner"
+                                 onDelete="CASCADE"/>
     </changeSet>
 
     <!-- Таблица для хранения дат выполнения привычек (completionDates) -->
@@ -78,12 +80,8 @@
                                  baseColumnNames="habit_id"
                                  referencedTableName="habit"
                                  referencedColumnNames="id"
-                                 constraintName="fk_completion_habit"/>
+                                 constraintName="fk_completion_habit"
+                                 onDelete="CASCADE"/>
     </changeSet>
-
-
-
-
-
 
 </databaseChangeLog>

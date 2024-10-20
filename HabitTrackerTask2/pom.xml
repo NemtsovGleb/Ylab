@@ -63,7 +63,7 @@
         <artifactId>liquibase-maven-plugin</artifactId>
         <version>4.29.2</version> <!-- Или более новая версия -->
         <configuration>
-          <propertyFile>liquibase.properties</propertyFile>
+          <propertyFile>src/main/resources/application.properties</propertyFile>
         </configuration>
       </plugin>
 

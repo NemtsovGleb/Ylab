@@ -6,7 +6,10 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <!-- Подключение нового changelog -->
-    <include file="v1/init-person-habit.xml" relativeToChangelogFile="true"/>
 
+
+    <!-- changelog для создания таблиц -->
+    <include file="v1/init-person-habit.xml" relativeToChangelogFile="true"/>
+    <!-- changelog для заполнения таблиц данными -->
+    <include file="v1/insert-person-habit-data.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

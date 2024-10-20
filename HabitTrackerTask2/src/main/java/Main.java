@@ -14,7 +14,7 @@ public class Main {
 
         // инициализация слоев программы
         PeopleRepository peopleRepository = PeopleRepository.getInstance();
-        HabitRepository habitRepository = HabitRepository.getInstance();
+        HabitRepository habitRepository = HabitRepository.getInstance(peopleRepository);
 
         PersonValidator validator = new PersonValidator(peopleRepository);
 

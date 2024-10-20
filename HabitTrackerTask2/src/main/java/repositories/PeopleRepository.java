@@ -40,11 +40,9 @@ public class PeopleRepository {
                 people.add(person);
 
             }
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
-
-
         return people;
     }
 
@@ -61,7 +59,7 @@ public class PeopleRepository {
             statement.setBoolean(5, person.getIsBlocked());
 
             statement.executeUpdate();
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -75,7 +73,7 @@ public class PeopleRepository {
             statement.setString(1, person.getUsername());
             statement.executeUpdate();
 
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -93,7 +91,7 @@ public class PeopleRepository {
             } else {
                 System.out.println("Пользователь с таким именем не найден.");
             }
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -109,15 +107,15 @@ public class PeopleRepository {
 
             if(resultSet.next()) {
                 Person person = new Person();
-                statement.setString(1, person.getUsername());
-                statement.setString(2, person.getPassword());
-                statement.setString(3, person.getEmail());
-                statement.setString(4, person.getRole());
-                statement.setBoolean(5, person.getIsBlocked());
+                person.setId(resultSet.getInt("id"));
+                person.setUsername(resultSet.getString("username"));
+                person.setPassword(resultSet.getString("password"));
+                person.setEmail(resultSet.getString("email"));
+                person.setRole(resultSet.getString("role"));
+                person.setIsBlocked(resultSet.getBoolean("is_blocked"));
                 return Optional.of(person);
             }
-            statement.executeUpdate();
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
         return Optional.empty();
@@ -134,15 +132,15 @@ public class PeopleRepository {
 
             if(resultSet.next()) {
                 Person person = new Person();
-                statement.setString(1, person.getUsername());
-                statement.setString(2, person.getPassword());
-                statement.setString(3, person.getEmail());
-                statement.setString(4, person.getRole());
-                statement.setBoolean(5, person.getIsBlocked());
+                person.setId(resultSet.getInt("id"));
+                person.setUsername(resultSet.getString("username"));
+                person.setPassword(resultSet.getString("password"));
+                person.setEmail(resultSet.getString("email"));
+                person.setRole(resultSet.getString("role"));
+                person.setIsBlocked(resultSet.getBoolean("is_blocked"));
                 return Optional.of(person);
             }
-            statement.executeUpdate();
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
         return Optional.empty();
@@ -155,7 +153,7 @@ public class PeopleRepository {
              ResultSet resultSet = statement.executeQuery(query)) {
 
             return resultSet.next();
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
         return false;
