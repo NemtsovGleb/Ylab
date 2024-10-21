@@ -1,5 +1,6 @@
 package repositories;
 
+import config.DatabaseConnection;
 import models.Person;
 
 import java.io.*;
@@ -26,7 +27,7 @@ public class PeopleRepository {
         List<Person> people = new ArrayList<>();
         String query = "Select * from person";
         try(Connection connection = DatabaseConnection.getConnection();
-        Statement statement = connection.createStatement();
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query)) {
 
             while (resultSet.next()) {

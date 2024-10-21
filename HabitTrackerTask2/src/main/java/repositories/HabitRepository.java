@@ -1,7 +1,7 @@
 package repositories;
 
+import config.DatabaseConnection;
 import models.Habit;
-import models.Person;
 
 import java.io.*;
 import java.sql.*;
