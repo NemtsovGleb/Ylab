@@ -6,7 +6,7 @@ services:
     container_name: habit_tracker_postgres
     restart: always
     environment:
-      POSTGRES_USER: user            # Логин для PostgreSQL
+      POSTGRES_USER: user            # Логин для PostgreSQL.
       POSTGRES_PASSWORD: user    # Пароль для PostgreSQL
       POSTGRES_DB: habit_tracker_task2     # Имя базы данных
     ports:
