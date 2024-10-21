@@ -1,0 +1,100 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- Добавляем пользователей в таблицу person -->
+    <changeSet id ="1" author="Nemtsov_Gleb">
+        <insert tableName="person">
+            <column name="id" value="1"/>
+            <column name="username" value="Gleb"/>
+            <column name="password" value="12345Abc@"/>
+            <column name="email" value="gleb.nemtsov@mail.ru"/>
+            <column name="role" value="ADMIN"/>
+            <column name="is_blocked" value="false"/>
+        </insert>
+
+        <insert tableName="person">
+            <column name="id" value="2"/>
+            <column name="username" value="jane_doe"/>
+            <column name="password" value="password123"/>
+            <column name="email" value="jane@example.com"/>
+            <column name="role" value="USER"/>
+            <column name="is_blocked" value="false"/>
+        </insert>
+        <insert tableName="person">
+            <column name="id" value="3"/>
+            <column name="username" value="admin_user"/>
+            <column name="password" value="password456"/>
+            <column name="email" value="admin@example.com"/>
+            <column name="role" value="ADMIN"/>
+            <column name="is_blocked" value="false"/>
+        </insert>
+
+    </changeSet>
+
+    <!-- Добавляем привычки в таблицу habit -->
+    <changeSet id="2" author="Nemtsov_Gleb">
+        <insert tableName="habit">
+            <column name="id" value="1"/>
+            <column name="name" value="Run every morning"/>
+            <column name="description" value="Running every morning for 30 minutes"/>
+            <column name="created_at" valueDate="2023-01-01"/>
+            <column name="frequency" value="Daily"/>
+            <column name="owner_id" value="1"/> <!-- Привычка для пользователя Gleb -->
+        </insert>
+        <insert tableName="habit">
+            <column name="id" value="2"/>
+            <column name="name" value="Read a book"/>
+            <column name="description" value="Read 10 pages of a book daily"/>
+            <column name="created_at" valueDate="2023-02-01"/>
+            <column name="frequency" value="Daily"/>
+            <column name="owner_id" value="1"/> <!-- Привычка для пользователя Gleb -->
+        </insert>
+        <insert tableName="habit">
+            <column name="id" value="3"/>
+            <column name="name" value="Meditate"/>
+            <column name="description" value="Daily meditation for 15 minutes"/>
+            <column name="created_at" valueDate="2023-03-01"/>
+            <column name="frequency" value="Daily"/>
+            <column name="owner_id" value="2"/> <!-- Привычка для пользователя jane_doe -->
+        </insert>
+        <insert tableName="habit">
+            <column name="id" value="4"/>
+            <column name="name" value="Gym workout"/>
+            <column name="description" value="Gym workout 3 times a week"/>
+            <column name="created_at" valueDate="2023-03-15"/>
+            <column name="frequency" value="Weekly"/>
+            <column name="owner_id" value="3"/> <!-- Привычка для пользователя admin_user -->
+        </insert>
+    </changeSet>
+
+    <!-- Заполняем таблицу дат выполнения привычек (habit_completion_dates) -->
+    <changeSet id="3" author="Nemtsov_Gleb">
+        <insert tableName="habit_completion_dates">
+            <column name="habit_id" value="1"/>
+            <column name="completion_date" valueDate="2023-01-02"/>
+        </insert>
+        <insert tableName="habit_completion_dates">
+            <column name="habit_id" value="1"/>
+            <column name="completion_date" valueDate="2023-01-03"/>
+        </insert>
+        <insert tableName="habit_completion_dates">
+            <column name="habit_id" value="2"/>
+            <column name="completion_date" valueDate="2023-02-02"/>
+        </insert>
+        <insert tableName="habit_completion_dates">
+            <column name="habit_id" value="2"/>
+            <column name="completion_date" valueDate="2023-02-03"/>
+        </insert>
+        <insert tableName="habit_completion_dates">
+            <column name="habit_id" value="3"/>
+            <column name="completion_date" valueDate="2023-03-02"/>
+        </insert>
+        <insert tableName="habit_completion_dates">
+            <column name="habit_id" value="4"/>
+            <column name="completion_date" valueDate="2023-03-17"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

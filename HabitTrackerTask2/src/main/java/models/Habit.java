@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Habit implements Serializable {
 
+    private int id;
     private String name;
     private String description;
     private Date createAt;
@@ -21,6 +22,10 @@ public class Habit implements Serializable {
         this.frequency = frequency;
         this.createAt = new Date();
         this.owner = owner;
+        this.completionDates = new ArrayList<>();
+    }
+
+    public Habit() {
         this.completionDates = new ArrayList<>();
     }
 
@@ -40,9 +45,7 @@ public class Habit implements Serializable {
         this.description = description;
     }
 
-    public Date getCreateAt() {
-        return createAt;
-    }
+
 
     public String getFormatCreateAt() {
         // Создаем форматтер с кастомным форматом
@@ -53,6 +56,10 @@ public class Habit implements Serializable {
     }
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
+    }
+
+    public Date getCreateAt() {
+        return createAt;
     }
 
     public Person getOwner() {
@@ -81,5 +88,13 @@ public class Habit implements Serializable {
 
     public void removeCompletionDate(Date date) {
         this.completionDates.remove(date);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

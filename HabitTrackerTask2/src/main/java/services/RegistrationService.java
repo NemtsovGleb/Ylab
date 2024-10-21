@@ -72,7 +72,6 @@ public class RegistrationService {
             // Если все данные валидны, создаем нового пользователя
             Person newPerson = new Person(username, password, email, role); // Создаем объект Person
             peopleRepository.addPerson(newPerson); // Добавляем пользователя в репозиторий
-            peopleRepository.saveData(); // Сохраняем изменения в файл
             System.out.println("Пользователь успешно зарегистрирован: " + username);
 
     }
