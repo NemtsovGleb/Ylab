@@ -5,19 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Person implements Serializable {
+public class Person {
 
-    private static final long serialVersionUID = 2L;
-    private static final Scanner scanner = new Scanner(System.in);
-
+    private int id;
     private String username;
     private String password;
     private String email;
     private String role;
     private boolean isBlocked;
     private List<Habit> habits;
-
-
 
     public Person(String username, String password, String email, String role) {
         this.username = username;
@@ -36,6 +32,14 @@ public class Person implements Serializable {
 
     public void removeHabit(Habit habit) {
         habits.remove(habit);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public List<Habit> getHabits() {
@@ -81,7 +85,4 @@ public class Person implements Serializable {
     public void setIsBlocked(boolean blocked) {
         isBlocked = blocked;
     }
-
-
-
 }

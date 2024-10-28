@@ -18,13 +18,12 @@ public class HabitService {
     }
 
     public void showHabits() {
-        // Передаем список привчек текущего пользователя
-        habitRepository.setOwnersHabits(peopleRepository.getCurrentPerson().getHabits());
-        if (habitRepository.getOwnersHabits().isEmpty()) {
+        List<Habit> habits = habitRepository.getOwnersHabits();
+        if (habits.isEmpty()) {
             System.out.println("\nПривычки отсутствуют.");
         } else {
             System.out.println("\n--- Ваши привычки ---");
-            for (Habit habit : habitRepository.getOwnersHabits()) {
+            for (Habit habit : habits) {
                 System.out.println("Название: " + habit.getName() + "\nОписание: " + habit.getDescription() + "\nДата создания: " + habit.getFormatCreateAt());
                 System.out.println("---------------");
             }
@@ -32,13 +31,14 @@ public class HabitService {
     }
 
     public Habit showHabitsForEdit() {
+        List<Habit> habits = habitRepository.getOwnersHabits();
         while(true) {
             System.out.println("\n--- РЕДАКТОР ПРИВЫЧЕК: ---");
             System.out.println("--- Ваши привычки ---");
-            for (int i = 0; i < habitRepository.getOwnersHabits().size(); i++)
-                System.out.println((i + 1) + ". " + habitRepository.getOwnersHabits().get(i).getName());
+            for (int i = 0; i < habits.size(); i++)
+                System.out.println((i + 1) + ". " + habits.get(i).getName());
 
-            System.out.println("Введите номер привычки для редактирования (1-" + habitRepository.getOwnersHabits().size() + ") или exit если передумали: ");
+            System.out.println("Введите номер привычки для редактирования (1-" + habits.size() + ") или exit если передумали: ");
 
             String choice = scanner.nextLine().trim();
             if (choice.equals("exit"))
@@ -46,11 +46,11 @@ public class HabitService {
 
             int intChoice = Integer.parseInt(choice);
 
-            if (intChoice < 1 || intChoice > habitRepository.getOwnersHabits().size()) {
+            if (intChoice < 1 || intChoice > habits.size()) {
                 System.out.println("Неверный выбор, попробуйте еще!");
                 continue;
             }
-            return habitRepository.getOwnersHabits().get(intChoice - 1);
+            return habits.get(intChoice - 1);
         }
     }
 
@@ -90,11 +90,9 @@ public class HabitService {
 
         Habit habit = new Habit(name, description, frequency, peopleRepository.getCurrentPerson());
         habitRepository.addHabit(habit);  // Добавляем в бд
-        peopleRepository.getCurrentPerson().addHabit(habit); // Добавляем в бд
+
 
         System.out.println("Привычка успешно добавлена!");
-        habitRepository.saveData();  // Сохраняем изменения в базе данны
-        peopleRepository.saveData();  // Сохраняем изменения в базе данных
     }
 
     public void removeHabit() {
@@ -126,8 +124,6 @@ public class HabitService {
         peopleRepository.getCurrentPerson().removeHabit(habitToRemove);
         habitRepository.remove(habitToRemove);
         System.out.println("Привычка успешно удалена!");
-        peopleRepository.saveData();  // Сохраняем изменения в базе данных
-        habitRepository.saveData();
     }
 
     public void editName(Habit habit) {
@@ -220,9 +216,6 @@ public class HabitService {
         // Добавляем сегодняшнюю дату как дату выполнения
         habitToComplete.addCompletionDate(new Date());
         System.out.println("Привычка \"" + habitToComplete.getName() + "\" отмечена как выполненная!");
-        habitRepository.saveData();    // Сохраняем изменения
-        peopleRepository.saveData();  // Сохраняем изменения
-
     }
 
     // Генерация статистики выполнения за указанный период (например неделя)

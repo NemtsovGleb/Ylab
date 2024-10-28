@@ -1,3 +1,4 @@
+import config.LiquibaseConfig;
 import controllers.AdminController;
 import controllers.AuthController;
 import controllers.HabitController;
@@ -12,9 +13,12 @@ public class Main {
 
     public static void main(String[] args) {
 
+        // Запуск миграций Liquibase перед запуском приложения
+        LiquibaseConfig.runMigrations();
+
         // инициализация слоев программы
         PeopleRepository peopleRepository = PeopleRepository.getInstance();
-        HabitRepository habitRepository = HabitRepository.getInstance();
+        HabitRepository habitRepository = HabitRepository.getInstance(peopleRepository);
 
         PersonValidator validator = new PersonValidator(peopleRepository);
 
